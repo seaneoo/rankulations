@@ -1,12 +1,12 @@
-package com.seaneoo.regulation_apple;
+package com.seaneoo.rankulations;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RegulationAppleApplication {
+public class RankulationsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RegulationAppleApplication.class, args);
+        SpringApplication.run(RankulationsApplication.class, args);
     }
 }

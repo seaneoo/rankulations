@@ -5,4 +5,4 @@ pluginManagement {
 	}
 }
 
-rootProject.name = "regulation-apple"
+rootProject.name = "rankulations"

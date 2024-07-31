@@ -1,4 +1,4 @@
-package com.seaneoo.regulation_apple.error;
+package com.seaneoo.rankulations.error;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

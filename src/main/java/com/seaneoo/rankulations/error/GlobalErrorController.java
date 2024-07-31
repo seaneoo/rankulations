@@ -1,4 +1,4 @@
-package com.seaneoo.regulation_apple.error;
+package com.seaneoo.rankulations.error;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
