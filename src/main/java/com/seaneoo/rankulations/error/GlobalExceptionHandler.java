@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -85,5 +87,14 @@ public class GlobalExceptionHandler {
                 .build();
         return ResponseEntity.status(httpStatus)
                 .body(response);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ExceptionResponse> handleAuthenticationException(HttpServletRequest req,
+                                                                           AuthenticationException e) {
+        var httpStatus = HttpStatus.BAD_REQUEST;
+        if (e instanceof BadCredentialsException) httpStatus = HttpStatus.UNAUTHORIZED;
+
+        return handleException(e, httpStatus, req);
     }
 }
