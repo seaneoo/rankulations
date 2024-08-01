@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -28,15 +29,23 @@ public class GlobalExceptionHandler {
     }
 
     private <T extends Throwable> ResponseEntity<ExceptionResponse> handleException(T throwable, HttpStatus httpStatus,
+                                                                                    @Nullable String message,
                                                                                     HttpServletRequest request) {
+        var m = message;
+        if (message == null || message.isBlank()) m = throwable.getMessage();
         var response = ExceptionResponse.builder()
                 .statusCode(httpStatus.value())
                 .statusReason(httpStatus.getReasonPhrase())
                 .path(request.getRequestURI())
-                .message(throwable.getMessage())
+                .message(m)
                 .build();
         return ResponseEntity.status(httpStatus)
                 .body(response);
+    }
+
+    private <T extends Throwable> ResponseEntity<ExceptionResponse> handleException(T throwable, HttpStatus httpStatus,
+                                                                                    HttpServletRequest request) {
+        return handleException(throwable, httpStatus, throwable.getMessage(), request);
     }
 
     @ExceptionHandler(Exception.class)
@@ -55,7 +64,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleResponseStatusException(HttpServletRequest req,
                                                                            ResponseStatusException e) {
         return handleException(e, HttpStatus.valueOf(e.getStatusCode()
-                .value()), req);
+                .value()), e.getReason(), req);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
