@@ -17,6 +17,7 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 
+import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -35,9 +36,9 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     String username;
 
-    @Column(nullable = false)
-    @JsonIgnore
-    String password;
+    @Column(name = "profile_pic")
+    @JsonProperty("profile_pic")
+    String profilePic;
 
     @Column(nullable = false)
     @Builder.Default
@@ -54,6 +55,15 @@ public class User implements UserDetails {
     @JsonProperty("updated_at")
     Instant updatedAt;
 
+    @Enumerated(value = STRING)
+    @Column(name = "auth_provider", nullable = false)
+    @JsonProperty("auth_provider")
+    AuthProvider authProvider;
+
+    @Column(name = "provider_id", nullable = false, unique = true)
+    @JsonProperty("provider_id")
+    String providerId;
+
     @Override
     public String getUsername() {
         return username;
@@ -61,7 +71,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return null;
     }
 
     @Override
