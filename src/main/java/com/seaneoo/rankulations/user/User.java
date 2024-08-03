@@ -37,9 +37,6 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     String username;
 
-    @Column(unique = true)
-    String email;
-
     @Column(name = "profile_pic")
     @JsonProperty("profile_pic")
     String profilePic;

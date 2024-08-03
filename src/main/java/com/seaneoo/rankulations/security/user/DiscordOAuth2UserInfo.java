@@ -21,12 +21,6 @@ public class DiscordOAuth2UserInfo extends OAuth2UserInfo {
     }
 
     @Override
-    public String getEmail() {
-        return attributes.get("email")
-                .toString();
-    }
-
-    @Override
     public String getProfilePic() {
         return attributes.get("avatar")
                 .toString();

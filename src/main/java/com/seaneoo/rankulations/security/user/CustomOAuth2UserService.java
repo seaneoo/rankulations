@@ -49,7 +49,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private User registerUser(OAuth2UserRequest userRequest, OAuth2UserInfo userInfo) {
         var newUser = User.builder()
                 .username(userInfo.getUsername())
-                .email(userInfo.getEmail())
                 .profilePic(userInfo.getProfilePic())
                 .authProvider(AuthProvider.valueOf(userRequest.getClientRegistration()
                         .getRegistrationId()
@@ -66,7 +65,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private User updateUser(User existingUser, OAuth2UserInfo userInfo) {
         existingUser.setUsername(userInfo.getUsername());
-        existingUser.setEmail(userInfo.getEmail());
         existingUser.setProfilePic(userInfo.getProfilePic());
         return userRepository.save(existingUser);
     }

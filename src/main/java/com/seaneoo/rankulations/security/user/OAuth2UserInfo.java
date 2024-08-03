@@ -13,8 +13,6 @@ public abstract class OAuth2UserInfo {
 
     String username;
 
-    String email;
-
     String profilePic;
 
     public OAuth2UserInfo(Map<String, Object> attributes) {
