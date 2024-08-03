@@ -8,7 +8,7 @@ spring:
             client-secret: ${DISCORD_OAUTH2_CLIENT_SECRET}
             client-authentication-method: client_secret_basic
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/discord
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             scope: identify
             client-name: Discord
         provider:
