@@ -22,7 +22,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Value("rankulations.initial-admin-users")
+    @Value("${rankulations.initial-admin-users}")
     private List<String> initialAdminUsers;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomOAuth2UserService.class);

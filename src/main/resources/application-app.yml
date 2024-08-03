@@ -1,4 +1,2 @@
 rankulations:
-  initial-admin-users:
-    - rankulations
-    - seaneoo
+  initial-admin-users: rankulations,seaneoo
