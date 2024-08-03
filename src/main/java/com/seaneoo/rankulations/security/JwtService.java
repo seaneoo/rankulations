@@ -1,11 +1,11 @@
 package com.seaneoo.rankulations.security;
 
+import com.seaneoo.rankulations.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -46,12 +46,12 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(User user) {
         var currentMs = System.currentTimeMillis();
         var issuedAt = new Date(currentMs);
         var expiresAt = new Date(currentMs + jwtExpiration);
         return Jwts.builder()
-                .subject(userDetails.getUsername()
+                .subject(user.getUsername()
                         .toLowerCase())
                 .issuedAt(issuedAt)
                 .expiration(expiresAt)
@@ -63,9 +63,9 @@ public class JwtService {
         return extractExpiration(token).before(new Date(System.currentTimeMillis()));
     }
 
-    public boolean isValid(String token, UserDetails userDetails) {
+    public boolean isValid(String token, User user) {
         var subject = extractSubject(token);
-        return subject.equals(userDetails.getUsername()
+        return subject.equals(user.getUsername()
                 .toLowerCase()) && !isExpired(token);
     }
 }
