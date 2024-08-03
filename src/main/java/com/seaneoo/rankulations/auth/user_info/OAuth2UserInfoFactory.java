@@ -1,6 +1,6 @@
-package com.seaneoo.rankulations.security.user;
+package com.seaneoo.rankulations.auth.user_info;
 
-import com.seaneoo.rankulations.user.AuthProvider;
+import com.seaneoo.rankulations.auth.AuthProvider;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 

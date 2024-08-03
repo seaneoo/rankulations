@@ -1,4 +1,4 @@
-package com.seaneoo.rankulations.user;
+package com.seaneoo.rankulations.auth;
 
 @SuppressWarnings("unused")
 public enum AuthProvider {

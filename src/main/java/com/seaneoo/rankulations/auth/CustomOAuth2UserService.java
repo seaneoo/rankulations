@@ -1,6 +1,7 @@
-package com.seaneoo.rankulations.security.user;
+package com.seaneoo.rankulations.auth;
 
-import com.seaneoo.rankulations.user.AuthProvider;
+import com.seaneoo.rankulations.auth.user_info.OAuth2UserInfo;
+import com.seaneoo.rankulations.auth.user_info.OAuth2UserInfoFactory;
 import com.seaneoo.rankulations.user.User;
 import com.seaneoo.rankulations.user.UserRepository;
 import com.seaneoo.rankulations.user.UserRole;

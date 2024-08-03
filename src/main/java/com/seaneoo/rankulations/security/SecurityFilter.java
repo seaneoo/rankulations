@@ -1,6 +1,6 @@
 package com.seaneoo.rankulations.security;
 
-import com.seaneoo.rankulations.security.user.CustomAuthSuccessHandler;
+import com.seaneoo.rankulations.auth.CustomAuthSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

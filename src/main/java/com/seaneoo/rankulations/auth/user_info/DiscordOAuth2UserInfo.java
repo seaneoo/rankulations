@@ -1,4 +1,4 @@
-package com.seaneoo.rankulations.security.user;
+package com.seaneoo.rankulations.auth.user_info;
 
 import java.util.Map;
 

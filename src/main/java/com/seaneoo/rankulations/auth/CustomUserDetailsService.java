@@ -1,4 +1,4 @@
-package com.seaneoo.rankulations.security.user;
+package com.seaneoo.rankulations.auth;
 
 import com.seaneoo.rankulations.error.exception.UserNotFoundException;
 import com.seaneoo.rankulations.user.User;

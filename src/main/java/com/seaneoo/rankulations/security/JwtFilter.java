@@ -1,6 +1,6 @@
 package com.seaneoo.rankulations.security;
 
-import com.seaneoo.rankulations.security.user.CustomUserDetailsService;
+import com.seaneoo.rankulations.auth.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

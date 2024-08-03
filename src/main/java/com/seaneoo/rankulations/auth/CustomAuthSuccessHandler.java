@@ -1,4 +1,4 @@
-package com.seaneoo.rankulations.security.user;
+package com.seaneoo.rankulations.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.seaneoo.rankulations.security.JwtService;
