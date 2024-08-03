@@ -2,9 +2,9 @@ package com.seaneoo.rankulations.security.user;
 
 import java.util.Map;
 
-public class RedditOAuth2UserInfo extends OAuth2UserInfo {
+public class DiscordOAuth2UserInfo extends OAuth2UserInfo {
 
-    public RedditOAuth2UserInfo(Map<String, Object> attributes) {
+    public DiscordOAuth2UserInfo(Map<String, Object> attributes) {
         super(attributes);
     }
 
@@ -16,13 +16,19 @@ public class RedditOAuth2UserInfo extends OAuth2UserInfo {
 
     @Override
     public String getUsername() {
-        return attributes.get("name")
+        return attributes.get("username")
+                .toString();
+    }
+
+    @Override
+    public String getEmail() {
+        return attributes.get("email")
                 .toString();
     }
 
     @Override
     public String getProfilePic() {
-        return attributes.get("icon_img")
+        return attributes.get("avatar")
                 .toString();
     }
 }

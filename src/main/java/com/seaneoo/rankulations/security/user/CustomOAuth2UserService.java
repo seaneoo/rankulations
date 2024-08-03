@@ -30,7 +30,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         var oAuth2User = super.loadUser(userRequest);
-        var userInfo = new RedditOAuth2UserInfo(oAuth2User.getAttributes());
+        var userInfo = new DiscordOAuth2UserInfo(oAuth2User.getAttributes());
 
         var userOptional = userRepository.findByProviderId(userInfo.getId());
         if (userOptional.isPresent()) {
@@ -49,6 +49,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private User registerUser(OAuth2UserRequest userRequest, OAuth2UserInfo userInfo) {
         var newUser = User.builder()
                 .username(userInfo.getUsername())
+                .email(userInfo.getEmail())
                 .profilePic(userInfo.getProfilePic())
                 .authProvider(AuthProvider.valueOf(userRequest.getClientRegistration()
                         .getRegistrationId()
@@ -65,6 +66,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private User updateUser(User existingUser, OAuth2UserInfo userInfo) {
         existingUser.setUsername(userInfo.getUsername());
+        existingUser.setEmail(userInfo.getEmail());
         existingUser.setProfilePic(userInfo.getProfilePic());
         return userRepository.save(existingUser);
     }
