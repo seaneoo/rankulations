@@ -8,11 +8,11 @@ import lombok.Data;
 import java.time.Instant;
 import java.util.List;
 
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
 @Data
 @Builder
-@JsonInclude(NON_NULL)
+@JsonInclude(NON_EMPTY)
 public class ExceptionResponse {
 
     @JsonProperty("status_code")
