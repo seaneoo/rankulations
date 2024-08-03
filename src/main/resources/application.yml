@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: rankulations
+  profiles:
+    include:
+      - db
+      - auth
+      - app
+logging:
+  file:
+    name: ${spring.application.name}.log
+
+security:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+    expiration-time: 600000

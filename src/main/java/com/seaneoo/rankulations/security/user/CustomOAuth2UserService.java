@@ -22,8 +22,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Value("${rankulations.admins}")
-    private List<String> adminUsers;
+    @Value("rankulations.initial-admin-users")
+    private List<String> initialAdminUsers;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomOAuth2UserService.class);
 
@@ -56,7 +56,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .providerId(userInfo.getId())
                 .build();
 
-        if (adminUsers.contains(newUser.getUsername())) {
+        if (initialAdminUsers.contains(newUser.getUsername())) {
             newUser.setRole(UserRole.ADMIN);
         }
 
