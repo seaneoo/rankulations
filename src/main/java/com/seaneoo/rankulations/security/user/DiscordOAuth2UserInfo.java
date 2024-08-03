@@ -22,7 +22,7 @@ public class DiscordOAuth2UserInfo extends OAuth2UserInfo {
 
     @Override
     public String getProfilePic() {
-        return attributes.get("avatar")
-                .toString();
+        var avatar = attributes.get("avatar");
+        return avatar != null ? avatar.toString() : null;
     }
 }
