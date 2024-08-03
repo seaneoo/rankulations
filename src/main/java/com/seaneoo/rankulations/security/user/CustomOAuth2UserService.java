@@ -30,7 +30,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         var oAuth2User = super.loadUser(userRequest);
-        var userInfo = new DiscordOAuth2UserInfo(oAuth2User.getAttributes());
+        var userInfo = OAuth2UserInfoFactory.get(userRequest, oAuth2User);
 
         var userOptional = userRepository.findByProviderId(userInfo.getId());
         if (userOptional.isPresent()) {
