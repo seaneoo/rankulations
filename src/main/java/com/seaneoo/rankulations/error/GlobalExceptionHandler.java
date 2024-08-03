@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -95,6 +96,13 @@ public class GlobalExceptionHandler {
         var httpStatus = HttpStatus.BAD_REQUEST;
         if (e instanceof BadCredentialsException) httpStatus = HttpStatus.UNAUTHORIZED;
 
+        return handleException(e, httpStatus, req);
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<ExceptionResponse> handleAuthorizationDeniedException(HttpServletRequest req,
+                                                                                AuthorizationDeniedException e) {
+        var httpStatus = HttpStatus.FORBIDDEN;
         return handleException(e, httpStatus, req);
     }
 }
