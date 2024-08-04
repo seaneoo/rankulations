@@ -1,5 +1,7 @@
 package com.seaneoo.rankulations.auth.user_info;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 import java.util.Map;
 
 public class DiscordOAuth2UserInfo extends OAuth2UserInfo {
@@ -22,7 +24,12 @@ public class DiscordOAuth2UserInfo extends OAuth2UserInfo {
 
     @Override
     public String getProfilePic() {
-        var avatar = attributes.get("avatar");
-        return avatar != null ? avatar.toString() : null;
+        var avatarId = attributes.get("avatar");
+        if (avatarId == null) return null;
+        return UriComponentsBuilder.fromUriString("https://cdn.discordapp.com/avatars")
+                .pathSegment(getId(), avatarId.toString())
+                .queryParam("size", "512")
+                .build()
+                .toUriString();
     }
 }
