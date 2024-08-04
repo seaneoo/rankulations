@@ -1,6 +1,5 @@
 package com.seaneoo.rankulations.auth;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.seaneoo.rankulations.security.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,9 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 @Component
 public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
@@ -31,18 +30,18 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) {
         var oAuth2User = (OAuth2User) authentication.getPrincipal();
         var user = customUserDetailsService.loadUserByUsername(oAuth2User.getName());
-        var token = jwtService.generateToken(user);
 
-        var responseBody = new HashMap<String, String>();
-        responseBody.put("token", token);
-        response.setContentType("application/json");
+        LOGGER.info("Handling authentication for user \"{}\"", user.getUsername());
+
+        var jwt = jwtService.generateToken(user);
+        var redirectUrl = UriComponentsBuilder.fromUriString("http://localhost:3000/auth")
+                .queryParam("token", jwt)
+                .build()
+                .toUriString();
 
         try {
-            response.getWriter()
-                    .write(new ObjectMapper().writeValueAsString(responseBody));
+            response.sendRedirect(redirectUrl);
         } catch (IOException e) {
-            LOGGER.error("Error handling authentication success for user \"{}\": {}", user.getUsername(),
-                    e.getMessage());
             throw new RuntimeException(e);
         }
     }
