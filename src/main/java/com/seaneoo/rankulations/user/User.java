@@ -35,7 +35,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = IDENTITY)
     Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     String username;
 
     @Column(name = "profile_pic")

@@ -33,7 +33,8 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) {
         var oAuth2User = (OAuth2User) authentication.getPrincipal();
-        var user = customUserDetailsService.loadUserByUsername(oAuth2User.getName());
+        var userProviderId = (String) oAuth2User.getAttribute("id"); // use OAuth2UserInfoFactory
+        var user = customUserDetailsService.loadUserByProviderId(userProviderId);
 
         LOGGER.info("Handling authentication for user \"{}\"", user.getUsername());
 
