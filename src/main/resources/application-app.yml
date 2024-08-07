@@ -1,3 +1,3 @@
 rankulations:
-  initial-admin-users: rankulations,seaneoo
+  initial-admin-users: rankulations
   auth-callback-url: http://localhost:3000/auth
