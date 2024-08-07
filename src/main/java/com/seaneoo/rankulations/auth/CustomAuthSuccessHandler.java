@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -23,6 +24,9 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     private JwtService jwtService;
 
+    @Value("${rankulations.auth-callback-url}")
+    private String authCallbackUrl;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomAuthSuccessHandler.class);
 
     @Override
@@ -34,7 +38,7 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
         LOGGER.info("Handling authentication for user \"{}\"", user.getUsername());
 
         var jwt = jwtService.generateToken(user);
-        var redirectUrl = UriComponentsBuilder.fromUriString("http://localhost:3000/auth")
+        var redirectUrl = UriComponentsBuilder.fromUriString(authCallbackUrl)
                 .queryParam("token", jwt)
                 .build()
                 .toUriString();
