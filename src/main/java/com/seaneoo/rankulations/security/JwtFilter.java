@@ -46,7 +46,7 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
-        var user = customUserDetailsService.loadUserByUsername(subject);
+        var user = customUserDetailsService.loadUserById(subject);
         var isTokenValid = jwtService.isValid(token, user);
 
         if (isTokenValid) {

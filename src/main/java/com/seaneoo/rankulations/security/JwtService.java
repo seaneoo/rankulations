@@ -51,8 +51,8 @@ public class JwtService {
         var issuedAt = new Date(currentMs);
         var expiresAt = new Date(currentMs + jwtExpiration);
         return Jwts.builder()
-                .subject(user.getUsername()
-                        .toLowerCase())
+                .subject(user.getId()
+                        .toString())
                 .issuedAt(issuedAt)
                 .expiration(expiresAt)
                 .signWith(getSecretSigningKey())
@@ -65,7 +65,7 @@ public class JwtService {
 
     public boolean isValid(String token, User user) {
         var subject = extractSubject(token);
-        return subject.equals(user.getUsername()
-                .toLowerCase()) && !isExpired(token);
+        return subject.equals(user.getId()
+                .toString()) && !isExpired(token);
     }
 }

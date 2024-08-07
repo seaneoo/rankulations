@@ -22,6 +22,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Transactional
+    public User loadUserById(String id) {
+        return userRepository.findById(Long.valueOf(id))
+                .orElseThrow(UserNotFoundException::new);
+    }
+
+    @Transactional
     public User loadUserByProviderId(String providerId) {
         return userRepository.findByProviderId(providerId)
                 .orElseThrow(UserNotFoundException::new);
