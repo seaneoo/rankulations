@@ -3,13 +3,12 @@ package com.seaneoo.rankulations.admin;
 import com.seaneoo.rankulations.error.exception.UserNotFoundException;
 import com.seaneoo.rankulations.user.User;
 import com.seaneoo.rankulations.user.UserRepository;
+import com.seaneoo.rankulations.user.UserRole;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +30,17 @@ public class AdminController {
         var user = userRepository.findById(userId)
                 .orElseThrow(UserNotFoundException::new);
         return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/users/{userId}/change-role")
+    public ResponseEntity<User> changeUserRole(@PathVariable Long userId,
+                                               @RequestBody @Valid ChangeUserRolePayload payload) {
+        var foundUser = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
+        var role = UserRole.valueOf(payload.role.toUpperCase());
+
+        foundUser.setRole(role);
+        userRepository.save(foundUser);
+        return ResponseEntity.ok(foundUser);
     }
 }
