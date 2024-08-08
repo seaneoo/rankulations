@@ -43,4 +43,14 @@ public class AdminController {
         userRepository.save(foundUser);
         return ResponseEntity.ok(foundUser);
     }
+
+    @PostMapping("/users/{userId}/enable-disable")
+    public ResponseEntity<User> enableDisableUser(@PathVariable Long userId) {
+        var foundUser = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
+
+        foundUser.setEnabled(!foundUser.isEnabled());
+        userRepository.save(foundUser);
+        return ResponseEntity.ok(foundUser);
+    }
 }
