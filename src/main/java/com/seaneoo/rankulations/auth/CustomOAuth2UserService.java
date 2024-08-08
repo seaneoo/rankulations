@@ -2,9 +2,9 @@ package com.seaneoo.rankulations.auth;
 
 import com.seaneoo.rankulations.auth.user_info.OAuth2UserInfo;
 import com.seaneoo.rankulations.auth.user_info.OAuth2UserInfoFactory;
-import com.seaneoo.rankulations.user.User;
-import com.seaneoo.rankulations.user.UserRepository;
-import com.seaneoo.rankulations.user.UserRole;
+import com.seaneoo.rankulations.feature.user.User;
+import com.seaneoo.rankulations.feature.user.UserRepository;
+import com.seaneoo.rankulations.feature.user.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +36,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         var userOptional = userRepository.findByProviderId(userInfo.getId());
         if (userOptional.isPresent()) {
             var user = updateUser(userOptional.get(), userInfo);
-            LOGGER.info("Updated existing user \"{}\" (provider={})", user.getUsername(), user.getAuthProvider()
+            LOGGER.info("Updated existing user \"{}\" (provider={})", user.getUsername(),
+                    user.getAuthProvider()
                     .name());
         } else {
             var user = registerUser(userRequest, userInfo);
-            LOGGER.info("Registered new user \"{}\" (provider={})", user.getUsername(), user.getAuthProvider()
+            LOGGER.info("Registered new user \"{}\" (provider={})", user.getUsername(),
+                    user.getAuthProvider()
                     .name());
         }
 

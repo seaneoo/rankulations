@@ -1,4 +1,4 @@
-package com.seaneoo.rankulations.user;
+package com.seaneoo.rankulations.feature.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.seaneoo.rankulations.security;
 
-import com.seaneoo.rankulations.user.User;
+import com.seaneoo.rankulations.feature.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

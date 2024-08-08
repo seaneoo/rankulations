@@ -1,8 +1,8 @@
 package com.seaneoo.rankulations.auth;
 
 import com.seaneoo.rankulations.error.exception.UserNotFoundException;
-import com.seaneoo.rankulations.user.User;
-import com.seaneoo.rankulations.user.UserRepository;
+import com.seaneoo.rankulations.feature.user.User;
+import com.seaneoo.rankulations.feature.user.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

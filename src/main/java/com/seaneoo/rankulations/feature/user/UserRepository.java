@@ -1,4 +1,4 @@
-package com.seaneoo.rankulations.user;
+package com.seaneoo.rankulations.feature.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.seaneoo.rankulations.user;
+package com.seaneoo.rankulations.feature.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

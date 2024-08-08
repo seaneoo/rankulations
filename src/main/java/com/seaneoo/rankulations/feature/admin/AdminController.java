@@ -1,9 +1,9 @@
-package com.seaneoo.rankulations.admin;
+package com.seaneoo.rankulations.feature.admin;
 
 import com.seaneoo.rankulations.error.exception.UserNotFoundException;
-import com.seaneoo.rankulations.user.User;
-import com.seaneoo.rankulations.user.UserRepository;
-import com.seaneoo.rankulations.user.UserRole;
+import com.seaneoo.rankulations.feature.user.User;
+import com.seaneoo.rankulations.feature.user.UserRepository;
+import com.seaneoo.rankulations.feature.user.UserRole;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

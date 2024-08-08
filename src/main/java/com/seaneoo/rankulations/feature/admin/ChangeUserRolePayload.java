@@ -1,4 +1,4 @@
-package com.seaneoo.rankulations.admin;
+package com.seaneoo.rankulations.feature.admin;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
