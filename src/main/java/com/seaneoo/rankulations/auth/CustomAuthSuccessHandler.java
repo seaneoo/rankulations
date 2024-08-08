@@ -1,5 +1,6 @@
 package com.seaneoo.rankulations.auth;
 
+import com.seaneoo.rankulations.error.exception.UserDisabledException;
 import com.seaneoo.rankulations.security.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,6 +38,8 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
         var user = customUserDetailsService.loadUserByProviderId(userProviderId);
 
         LOGGER.info("Handling authentication for user \"{}\"", user.getUsername());
+
+        if (!user.isEnabled()) throw new UserDisabledException();
 
         var jwt = jwtService.generateToken(user);
         var redirectUrl = UriComponentsBuilder.fromUriString(authCallbackUrl)
